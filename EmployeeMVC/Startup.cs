@@ -3,15 +3,11 @@ using Employee.Model;
 using Employee.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeMVC
 {
@@ -27,19 +23,22 @@ namespace EmployeeMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<InterviewContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DBConnection"));
-            });
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<InterviewContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DBConnection"));
+                });
+
             services.AddControllersWithViews();
+            services.AddMvc();
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddMvc();
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +50,7 @@ namespace EmployeeMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            loggerFactory.AddLog4Net();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -26,12 +26,12 @@ namespace Employee.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-                var configuration = builder.Build();
-                var conn = configuration.GetConnectionString("DBConnection");
-                optionsBuilder.UseSqlServer(conn);
+                //var builder = new ConfigurationBuilder()
+                //.SetBasePath(Directory.GetCurrentDirectory())
+                //.AddJsonFile("appsettings.json");
+                //var configuration = builder.Build();
+                //var conn = configuration.GetConnectionString("DBConnection");
+                //optionsBuilder.UseSqlServer(conn);
             }
         }
 
