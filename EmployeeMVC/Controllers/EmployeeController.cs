@@ -1,18 +1,17 @@
-﻿using EmployeeMVC.Models;
+﻿using Employee.Interface;
+using Employee.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Employee.Model;
-using Microsoft.EntityFrameworkCore;
-using Employee.Interface;
-using Employee.Service;
+using System.Linq.Expressions;
 
 namespace EmployeeMVC.Controllers
-{
+{/// <summary>
+/// Employee管理
+/// </summary>
     public class EmployeeController : Controller
     {
         private readonly ILogger<EmployeeController> _logger;
@@ -21,32 +20,112 @@ namespace EmployeeMVC.Controllers
         private readonly DbContext _dbContext;
 
         public EmployeeController(ILogger<EmployeeController> logger
-            , ILoggerFactory loggerFactory
-            , IEmployeeService employeeService
-            , DbContext dbContext
-            )
+           , ILoggerFactory loggerFactory
+           , IEmployeeService employeeService
+           , DbContext dbContext
+           )
         {
             _logger = logger;
             this._loggerFactory = loggerFactory;
             this._iEmployeeService = employeeService;
             this._dbContext = dbContext;
         }
-        public IActionResult Index()
+        // GET: EmployeeController
+
+
+        public ActionResult Index()
         {
-            this._loggerFactory.CreateLogger<HomeController>().LogWarning("This is FirstController-Index 1");
-            #region 测试Context
-            //using (InterviewContext context = new InterviewContext())
-            //{
-            //    base.ViewBag.Name = context.Set<Employee.Model.Employee>().Find(1).FirstName;
-            //}
-            //base.ViewBag.Name = _dbContext.Set<Employee.Model.Employee>().Find(1).FirstName;
-            #endregion
+            var users = this._iEmployeeService.Set<Employee.Model.Employee>().Where(x => (State)x.State == State.Nomal);
+            return View(users);
+        }
 
+        [HttpPost]
+        public ActionResult IndexByFilter()
+        {
+            var fName = Request.Form["txtFName"]; 
+            var lName = Request.Form["txtLName"];
 
-            var user = this._iEmployeeService.Find<Employee.Model.Employee>(1);
-            base.ViewBag.Name = user.FirstName;
+            Expression<Func<Employee.Model.Employee, bool>> expression = null;
+            if (fName == string.Empty && lName != string.Empty)
+            {
+                expression = x => x.LastName.Contains(lName);
+            }
+            else if (fName != string.Empty && lName == string.Empty)
+            {
+                expression = x => x.FirstName.Contains(fName);
+            }
+            else if (fName != string.Empty && lName != string.Empty)
+            {
+                expression = x => x.FirstName.Contains(fName) && x.LastName.Contains(lName);
+            }
 
+            //var user = this._iEmployeeService.QueryPage<Employee.Model.Employee,int>(u => u.FirstName.Contains(fName) || u.LastName.Contains(lName), 5, 1, u => u.EmployeeId);
+            var user = this._iEmployeeService.Query<Employee.Model.Employee>(expression);
+
+            return View("Index", user);
+        }
+
+        // GET: EmployeeController/Create
+        public ActionResult Create()
+        {
             return View();
+        }
+
+        // POST: EmployeeController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: EmployeeController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: EmployeeController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: EmployeeController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: EmployeeController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

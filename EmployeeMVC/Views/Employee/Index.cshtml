@@ -1,11 +1,64 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Employee.Model.Employee>
+
+@{
+    ViewData["Title"] = "";
+}
+<div class="text-center">
+    <h1 class="display-4">员工查询</h1>
+</div>
+
+
+@using (Html.BeginForm("IndexByFilter", "Employee", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-1 ">@Html.Label("姓：")</div>
+        <div class="col-md-3">@Html.TextBox("txtLName")</div>
+        <div class="col-md-1 ">@Html.Label("名：")</div>
+        <div class="col-md-3">@Html.TextBox("txtFName")</div>
+        <div class="col-md-4 ">
+            @*@Html.ActionLink("提交", "IndexByFilter", new { fName = "", lName = "lTest" })*@
+            <input type="submit" value="提交" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
 }
 
-<div class="text-center">
-    <h1 class="display-4">员工管理</h1>
-</div>
-<br />
-<div>
-    
-</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HiredDate)
+            </th>
+            <th>
+                @Html.ActionLink("新建", "Create", new { }, new { @class = "btn btn-primary" })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HiredDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-primary">修改</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-primary">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

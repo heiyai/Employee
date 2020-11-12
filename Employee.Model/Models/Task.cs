@@ -15,5 +15,8 @@ namespace Employee.Model
         public byte State { get; set; }
 
         public virtual Employee Employee { get; set; }
+
+        public string TName { get { return TaskName.Length > 15 ? TaskName.Substring(0, 15) + "..." : TaskName; } }
+        
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Employee.Model
 {
-    public enum State : byte
+    public enum State 
     {
         Nomal = 0,
         Deleted = 1,
@@ -13,6 +13,6 @@ namespace Employee.Model
     public static partial class ext
     {
         public static bool IsDeleted(this State target) { return target == State.Deleted; }
-        public static State AsEmployeeState(this byte value) { return (State)value; }
+        public static State AsState(this byte value) { return (State)value; }
     }
 }
