@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Employee.Model
 {
     [Serializable]
+    [Table("Employee")]
     public class Employee : BaseEntity
     {
         [Required]
@@ -17,7 +19,7 @@ namespace Employee.Model
 
         [Required]
         public DateTime HiredDate { get; set; }
-        public List<Task> EmployeeTaskList { get; set; }
+        public ICollection<Task> EmployeeTaskList { get; set; }
 
         public State State { get; set; }
     }

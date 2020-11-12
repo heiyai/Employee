@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Employee.Model
 {
     [Serializable]
+    [Table("Task")]
     public class Task: BaseEntity
     {
         public string TaskName { get; set; }
