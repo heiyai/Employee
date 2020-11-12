@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace Employee.Model.Models
+namespace Employee.Model
 {
     public partial class InterviewContext : DbContext
     {

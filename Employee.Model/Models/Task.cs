@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Employee.Model.Models
+namespace Employee.Model
 {
     public partial class Task
     {
