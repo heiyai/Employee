@@ -13,9 +13,9 @@ namespace Employee.Service
         {
 
         }
-        public List<Model.Employee> CacheAllEmployee()
-        {
-            return base.Set<Model.Employee>().ToList();
-        }
+        //public List<Model.Employee> CacheAllEmployee()
+        //{
+        //    return base.Set<Model.Employee>().ToList();
+        //}
     }
 }

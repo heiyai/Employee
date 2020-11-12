@@ -10,6 +10,6 @@ namespace Employee.Interface.IService
         /// 类别数据一般是不变化的
         /// </summary>
         /// <returns></returns>
-        List<Employee.Model.Employee> CacheAllEmployee();
+        //List<Employee.Model.Employee> CacheAllEmployee();
     }
 }
