@@ -2,7 +2,8 @@
 
 namespace Employee.Model
 {
-    public class Class1
+    public interface IEntity
     {
+        int ID { get; }
     }
 }

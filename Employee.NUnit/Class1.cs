@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Employee.Interface
+namespace Employee.NUnit
 {
     public class Class1
     {
