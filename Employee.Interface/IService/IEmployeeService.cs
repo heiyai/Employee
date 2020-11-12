@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Employee.Interface.IService
+namespace Employee.Interface
 {
     public interface IEmployeeService : IBaseService
     {
@@ -10,6 +10,6 @@ namespace Employee.Interface.IService
         /// 类别数据一般是不变化的
         /// </summary>
         /// <returns></returns>
-        //List<Employee.Model.Employee> CacheAllEmployee();
+        List<Employee.Model.Employee> CacheAllEmployee();
     }
 }

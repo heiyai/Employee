@@ -1,4 +1,4 @@
-﻿using Employee.Interface.IService;
+﻿using Employee.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

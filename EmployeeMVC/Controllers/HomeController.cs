@@ -6,20 +6,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Employee.Model;
+using Microsoft.EntityFrameworkCore;
+using Employee.Interface;
+using Employee.Service;
 
 namespace EmployeeMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IEmployeeService _iEmployeeService;
+        public HomeController(ILogger<HomeController> logger
+            ,EmployeeService employeeService)
         {
             _logger = logger;
+            _iEmployeeService = employeeService;
         }
 
         public IActionResult Index()
         {
+            //var userList = this._iEmployeeService.QueryPage<Employee.Model.Employee, int>(u => u.EmployeeId > 1, 5, 1, u => u.EmployeeId);
+            var user = this._iEmployeeService.Find<Employee.Model.Employee>(1);
+            base.ViewBag.FirstName = user.FirstName;
+
             return View();
         }
 
