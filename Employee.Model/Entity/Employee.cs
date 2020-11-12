@@ -17,7 +17,7 @@ namespace Employee.Model
 
         [Required]
         public DateTime HiredDate { get; set; }
-        public List<EmployeeTask> EmployeeTaskList { get; set; }
+        public List<Task> EmployeeTaskList { get; set; }
 
         public State State { get; set; }
     }
