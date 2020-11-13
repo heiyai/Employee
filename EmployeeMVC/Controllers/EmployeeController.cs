@@ -1,11 +1,9 @@
 ﻿using Employee.Interface;
-using Employee.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace EmployeeMVC.Controllers

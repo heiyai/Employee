@@ -56,7 +56,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-primary">修改</a> |
                     <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-primary">删除</a>
-                    <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-primary">任务</a>
+                    <a asp-action="/Task/Index" asp-route-id="@item.EmployeeId" class="btn btn-primary">任务</a>
                 </td>
             </tr>
         }
