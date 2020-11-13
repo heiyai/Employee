@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +23,8 @@ namespace Employee.Model
         [Description("录取日期")]
         [DataType(DataType.DateTime)]
         public DateTime HiredDate { get; set; }
+
+        public ICollection Tasks { get; set; }
 
         [Description("名")]
         public string FName { get { return FirstName.Length > 5 ? FirstName.Substring(0, 5) + "..." : FirstName; } }
