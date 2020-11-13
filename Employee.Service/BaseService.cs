@@ -88,7 +88,7 @@ namespace Employee.Service
         public T Insert<T>(T t) where T : class
         {
             this.Context.Set<T>().Add(t);
-            this.Commit();//写在这里  就不需要单独commit  不写就需要
+            this.Commit();
             return t;
         }
 
