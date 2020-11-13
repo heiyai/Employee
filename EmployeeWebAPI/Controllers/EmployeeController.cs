@@ -1,11 +1,10 @@
 ﻿using Employee.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Employee.Model;
 
 namespace EmployeeWebAPI.Controllers
 {
@@ -20,39 +19,41 @@ namespace EmployeeWebAPI.Controllers
             this._iEmployeeService = employeeService;
             this._iTaskService = taskService;
         }
-        // GET: api/<EmployeeController>
-        [HttpGet]
-        public IEnumerable<Employee.Model.Employee> Get()
-        {
-            return this._iEmployeeService.Set<Employee.Model.Employee>();
-        }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             var emp = _iEmployeeService.Find<Employee.Model.Employee>(id);
+            if (emp == null)
+                return app.Tag.Failed;
             emp.Tasks = _iTaskService.Query<Employee.Model.Task>(x => x.EmployeeId == emp.EmployeeId).ToList();
             return Newtonsoft.Json.JsonConvert.SerializeObject(emp);
-            
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
+
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            _iTaskService.DeleteByEmployeeID<Task>(id);
+            _iEmployeeService.Delete<Employee.Model.Employee>(id);
+
+            return app.Tag.Successufl;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Employee.Interface;
 using Microsoft.EntityFrameworkCore;
+using Employee.Model;
+using System;
 
 namespace Employee.Service
 {
@@ -7,6 +9,16 @@ namespace Employee.Service
     {
         public TaskService(DbContext context) : base(context)
         {
+        }
+
+        public void DeleteByEmployeeID<Task>(int employeeID)
+        {
+
+            var tasks = this.Query<Employee.Model.Task>(x => x.EmployeeId == employeeID);
+            if (tasks == null) throw new Exception("t is null");
+            this.Context.RemoveRange(tasks);
+            this.Commit();
+
         }
     }
 }

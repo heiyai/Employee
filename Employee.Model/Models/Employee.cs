@@ -11,6 +11,10 @@ namespace Employee.Model
 {
     public partial class Employee
     {
+        public Employee()
+        {
+            Tasks = new HashSet<Task>();
+        }
         public int EmployeeId { get; set; }
 
         [Required]
@@ -26,8 +30,8 @@ namespace Employee.Model
         [DataType(DataType.DateTime)]
         public DateTime HiredDate { get; set; }
 
-        public IList<Task> Tasks { get; set; }
-
+        //public IList<Task> Tasks { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
         [Description("名")]
         public string FName { get { return FirstName.Length > 5 ? FirstName.Substring(0, 5) + "..." : FirstName; } }
         [Description("姓")]

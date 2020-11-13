@@ -23,7 +23,7 @@ namespace Employee.Model
         [DataType(DataType.DateTime)]
         public DateTime Deadline { get; set; }
 
-        //public virtual Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         [Description("任务名称")]
         public string TName { get { return TaskName.Length > 15 ? TaskName.Substring(0, 15) + "..." : TaskName; } }
 

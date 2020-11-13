@@ -48,9 +48,9 @@ namespace Employee.Model
 
             modelBuilder.Entity<Task>(entity =>
             {
-                //entity.HasNoKey();
-
                 entity.ToTable("Task");
+
+                entity.Property(e => e.TaskId).HasColumnName("TaskID");
 
                 entity.Property(e => e.Deadline)
                     .HasColumnType("datetime")
@@ -62,20 +62,15 @@ namespace Employee.Model
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.TaskId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("TaskID");
-
                 entity.Property(e => e.TaskName)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
 
-                //entity.HasOne(d => d.Employee)
-                //    .WithMany()
-                //    .HasForeignKey(d => d.EmployeeId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Task_Employee");
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Task_Employee");
             });
 
             OnModelCreatingPartial(modelBuilder);
