@@ -35,8 +35,9 @@ namespace EmployeeMVC.Controllers
         {
             var list = _iTaskService.Query<Task>(x => x.EmployeeId == id);
             var employee = _iEmployeeService.Find<Employee.Model.Employee>(id);
-            TempData[app.Tag.EmployeeName] = employee.FirstName + employee.LastName;
-            TempData[app.Tag.EmployeeId] = id;
+            ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] = employee.FirstName + employee.LastName;
+            ViewBag.EmployeeID = TempData[app.Tag.EmployeeId] = id;
+
             return View(list);
         }
 
@@ -61,9 +62,37 @@ namespace EmployeeMVC.Controllers
                     Deadline = DateTime.Parse(collection[app.Tag.DeadLine])
                 };
                 this._iTaskService.Update<Task>(tk);
-                return RedirectToAction(nameof(Index), new { id = collection[app.Tag.EmployeeId]});
+                return RedirectToAction(nameof(Index), new { id = collection[app.Tag.EmployeeId] });
             }
-            catch 
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                Task tk = new Task()
+                {
+                    EmployeeId = int.Parse(collection[app.Tag.EmployeeId].ToString()),
+                    TaskName = collection[app.Tag.TaskName],
+                    StartTime = DateTime.Parse(collection[app.Tag.StartTime]),
+                    Deadline = DateTime.Parse(collection[app.Tag.DeadLine])
+                };
+
+                var entity = this._iTaskService.Insert<Task>(tk);
+                return RedirectToAction(nameof(Index), new { id = int.Parse(collection[app.Tag.EmployeeId].ToString()) });
+            }
+            catch
             {
                 return View();
             }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Session;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -33,6 +34,7 @@ namespace EmployeeMVC
 
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddSession();
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<ITaskService, TaskService>();
@@ -57,7 +59,7 @@ namespace EmployeeMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -5,12 +5,9 @@
 }
 
 <h1>
-    <span class="font-weight-bold text-primary">@TempData["EmployeeName"]</span>的任务
+    <span class="font-weight-bold text-primary">@ViewBag.EmployeeName</span>的任务
 </h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Deadline)
             </th>
-            <th></th>
+            <th>
+                <a asp-action="Create" asp-route-id="@ViewBag.EmployeeID" class="btn btn-primary">新建</a>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +30,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TaskName)
+                    @Html.DisplayFor(modelItem => item.TName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
@@ -42,6 +41,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TaskId" class="btn btn-primary">修改</a> |
                     <a asp-action="Delete" asp-route-id="@item.TaskId" class="btn btn-primary">删除</a>
+                    
                 </td>
             </tr>
         }
