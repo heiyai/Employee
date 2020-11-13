@@ -7,9 +7,7 @@ using System;
 using System.Linq.Expressions;
 
 namespace EmployeeMVC.Controllers
-{/// <summary>
-/// Employee管理
-/// </summary>
+{
     public class EmployeeController : Controller
     {
         private readonly ILogger<EmployeeController> _logger;

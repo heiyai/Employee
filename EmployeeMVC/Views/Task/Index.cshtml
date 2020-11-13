@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Employee.Model.Task>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>
+    <span class="font-weight-bold text-primary">@ViewBag.EmployeeName</span>的任务
+</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TaskId" class="btn btn-primary">修改</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TaskId" class="btn btn-primary">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -35,7 +35,7 @@ namespace EmployeeMVC
             services.AddMvc();
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
+            services.AddScoped<ITaskService, TaskService>();
 
         }
 
