@@ -4,9 +4,11 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="text-center">
+    <h1 class="display-4">员工删除</h1>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>您确定想要删除此员工吗？</h3>
 <div>
     <h4>Employee</h4>
     <hr />
@@ -29,17 +31,11 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.HiredDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="EmployeeId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="删除" class="btn btn-danger" onclick="return confirm('是否确认该操作！')" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

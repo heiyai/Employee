@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace EmployeeMVC
 {
@@ -33,7 +35,7 @@ namespace EmployeeMVC
             services.AddMvc();
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
-
+            services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
         }
 

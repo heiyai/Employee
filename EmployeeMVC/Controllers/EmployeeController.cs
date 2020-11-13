@@ -35,15 +35,15 @@ namespace EmployeeMVC.Controllers
 
         public ActionResult Index()
         {
-            var users = this._iEmployeeService.Set<Employee.Model.Employee>().Where(x => (State)x.State == State.Nomal);
+            var users = this._iEmployeeService.Set<Employee.Model.Employee>();
             return View(users);
         }
 
         [HttpPost]
         public ActionResult IndexByFilter()
         {
-            var fName = Request.Form["txtFName"]; 
-            var lName = Request.Form["txtLName"];
+            var fName = Request.Form[app.Tag.FirstName];
+            var lName = Request.Form[app.Tag.LastName];
 
             Expression<Func<Employee.Model.Employee, bool>> expression = null;
             if (fName == string.Empty && lName != string.Empty)
@@ -62,7 +62,7 @@ namespace EmployeeMVC.Controllers
             //var user = this._iEmployeeService.QueryPage<Employee.Model.Employee,int>(u => u.FirstName.Contains(fName) || u.LastName.Contains(lName), 5, 1, u => u.EmployeeId);
             var user = this._iEmployeeService.Query<Employee.Model.Employee>(expression);
 
-            return View("Index", user);
+            return View(nameof(Index), user);
         }
 
         // GET: EmployeeController/Create
@@ -78,6 +78,16 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
+                var lastName = collection[app.Tag.LastName];
+                var firstName = collection[app.Tag.FirstName];
+
+                Employee.Model.Employee emp = new Employee.Model.Employee()
+                {
+                    FirstName = firstName,
+                    LastName = lastName
+                };
+
+                var entity = this._iEmployeeService.Insert<Employee.Model.Employee>(emp);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -89,7 +99,8 @@ namespace EmployeeMVC.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var entity = _iEmployeeService.Find<Employee.Model.Employee>(id);
+            return View(entity);
         }
 
         // POST: EmployeeController/Edit/5
@@ -99,6 +110,15 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
+                Employee.Model.Employee emp = new Employee.Model.Employee()
+                {
+                    EmployeeId = int.Parse(collection[app.Tag.EmployeeId]),
+                    FirstName = collection[app.Tag.LastName],
+                    LastName = collection[app.Tag.FirstName],
+                    HiredDate = DateTime.Parse(collection[app.Tag.HiredDate])
+                };
+
+                this._iEmployeeService.Update<Employee.Model.Employee>(emp);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -110,7 +130,8 @@ namespace EmployeeMVC.Controllers
         // GET: EmployeeController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var entity = _iEmployeeService.Find<Employee.Model.Employee>(id);
+            return View(entity);
         }
 
         // POST: EmployeeController/Delete/5
@@ -120,6 +141,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
+                _iEmployeeService.Delete<Employee.Model.Employee>(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
