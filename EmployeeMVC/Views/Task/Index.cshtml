@@ -5,7 +5,7 @@
 }
 
 <h1>
-    <span class="font-weight-bold text-primary">@ViewBag.EmployeeName</span>的任务
+    <span class="font-weight-bold text-primary">@TempData["EmployeeName"]</span>的任务
 </h1>
 
 <p>
@@ -47,3 +47,6 @@
         }
     </tbody>
 </table>
+<div>
+    <a asp-controller="Employee" asp-action="Index">Back to List</a>
+</div>

@@ -60,7 +60,7 @@ namespace Employee.Model
 
             modelBuilder.Entity<Task>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.ToTable("Task");
 
