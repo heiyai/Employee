@@ -20,15 +20,7 @@ namespace Employee.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                //var builder = new ConfigurationBuilder()
-                //.SetBasePath(Directory.GetCurrentDirectory())
-                //.AddJsonFile("appsettings.json");
-                //var configuration = builder.Build();
-                //var conn = configuration.GetConnectionString("DBConnection");
-                //optionsBuilder.UseSqlServer(conn);
-            }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,11 +71,11 @@ namespace Employee.Model
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Employee)
-                    .WithMany()
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Task_Employee");
+                //entity.HasOne(d => d.Employee)
+                //    .WithMany()
+                //    .HasForeignKey(d => d.EmployeeId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Task_Employee");
             });
 
             OnModelCreatingPartial(modelBuilder);

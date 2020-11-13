@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 #nullable disable
 
@@ -24,7 +26,7 @@ namespace Employee.Model
         [DataType(DataType.DateTime)]
         public DateTime HiredDate { get; set; }
 
-        public ICollection Tasks { get; set; }
+        public IList<Task> Tasks { get; set; }
 
         [Description("名")]
         public string FName { get { return FirstName.Length > 5 ? FirstName.Substring(0, 5) + "..." : FirstName; } }

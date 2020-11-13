@@ -1,7 +1,11 @@
+using Employee.Interface;
+using Employee.Model;
+using Employee.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +30,14 @@ namespace EmployeeWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<InterviewContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DBConnection"));
+                });
+            services.AddScoped<DbContext, InterviewContext>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<ITaskService, TaskService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

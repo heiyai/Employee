@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Employee.Interface\Employee.Interface.csproj" />
+    <ProjectReference Include="..\Employee.Model\Employee.Model.csproj" />
+    <ProjectReference Include="..\Employee.Service\Employee.Service.csproj" />
+  </ItemGroup>
+
 
 </Project>
