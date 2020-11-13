@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Session;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using EmployeeMVC.Utility;
 
 namespace EmployeeMVC
 {
@@ -32,12 +33,20 @@ namespace EmployeeMVC
                     options.UseSqlServer(Configuration.GetConnectionString("DBConnection"));
                 });
 
+            services.AddControllersWithViews(
+                options =>
+                {
+
+                    options.Filters.Add<CustomExceptionFilterAttribute>();
+
+                });
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddSession();
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<ITaskService, TaskService>();
+            //services.AddScoped(typeof(CustomExceptionFilterAttribute));
 
         }
 
