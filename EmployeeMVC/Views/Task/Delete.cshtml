@@ -1,0 +1,43 @@
+﻿@model Employee.Model.Task
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>
+    <span class="font-weight-bold text-primary">@TempData[app.Tag.EmployeeName]</span>的任务删除
+</h1>
+
+<h3>您确定想要删除此任务吗？</h3>
+<hr />
+<div>
+
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TaskName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TaskName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TaskId" />
+        <input type="hidden" asp-for="EmployeeId" value="@TempData[app.Tag.EmployeeId]"/>
+        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('是否确认该操作！')" /> |
+        <a asp-action="Index" asp-route-id="@TempData[app.Tag.EmployeeId]">返回</a>
+    </form>
+</div>

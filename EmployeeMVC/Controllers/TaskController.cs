@@ -97,5 +97,27 @@ namespace EmployeeMVC.Controllers
                 return View();
             }
         }
+
+        public ActionResult Delete(int id)
+        {
+            var entity = _iTaskService.Find<Task>(id);
+            return View(entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                _iTaskService.Delete<Task>(id);
+                var a = int.Parse(collection[app.Tag.EmployeeId].ToString());
+                return RedirectToAction(nameof(Index),new { id = int.Parse(collection[app.Tag.EmployeeId].ToString())});
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
