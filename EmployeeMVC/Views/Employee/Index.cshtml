@@ -6,22 +6,22 @@
 <div class="text-center">
     <h1 class="display-4">员工查询</h1>
 </div>
-
+<br />
 
 @using (Html.BeginForm("IndexByFilter", "Employee", FormMethod.Post))
 {
-    <div class="row">
-        <div class="col-md-1 ">@Html.Label("姓：")</div>
+    <div class="row text-center">
+        <div class="col-md-3 ">@Html.Label("请输入员工的姓：")</div>
         <div class="col-md-3">@Html.TextBox("LastName")</div>
-        <div class="col-md-1 ">@Html.Label("名：")</div>
+        <div class="col-md-3 ">@Html.Label("请输入员工的名：")</div>
         <div class="col-md-3">@Html.TextBox("FirstName")</div>
-        <div class="col-md-4 ">
-            <input type="submit" value="提交" class="btn btn-primary" />
-        </div>
     </div>
     <br />
+    <div class="row justify-content-center">
+        <input type="submit" value="提交" class="btn btn-primary" />
+    </div>
 }
-
+<br />
 
 <table class="table">
     <thead>
@@ -48,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.FName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LName) 
+                    @Html.DisplayFor(modelItem => item.LName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HiredDate)

@@ -10,9 +10,10 @@ namespace Employee.Model
     public partial class Employee
     {
         public int EmployeeId { get; set; }
-        [Description("名")]
+        
         [Required]
         [MaxLength(50)]
+        [Description("名")]
         public string FirstName { get; set; }
         [Description("姓")]
         [Required]

@@ -33,12 +33,25 @@ namespace EmployeeMVC.Controllers
         }
         public IActionResult Index(int id)
         {
+            if (HttpContext.Session.GetInt32(app.Tag.EmployeeId) == null)
+                HttpContext.Session.SetInt32(app.Tag.EmployeeId, id);
+            if (id == 0)
+                id = HttpContext.Session.GetInt32(app.Tag.EmployeeId).Value;
             var list = _iTaskService.Query<Task>(x => x.EmployeeId == id);
             var employee = _iEmployeeService.Find<Employee.Model.Employee>(id);
             ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] = employee.FirstName + employee.LastName;
             ViewBag.EmployeeID = TempData[app.Tag.EmployeeId] = id;
-
             return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult IndexByFilter()
+        {
+            var tName = Request.Form[app.Tag.TaskName];
+            var employeeID = HttpContext.Session.GetInt32(app.Tag.EmployeeId);
+            var user = this._iTaskService.Query<Employee.Model.Task>(x => x.TaskName.Contains(tName) && x.EmployeeId == employeeID);
+
+            return View(nameof(Index), user);
         }
 
         public ActionResult Edit(int id)
@@ -112,7 +125,7 @@ namespace EmployeeMVC.Controllers
             {
                 _iTaskService.Delete<Task>(id);
                 var a = int.Parse(collection[app.Tag.EmployeeId].ToString());
-                return RedirectToAction(nameof(Index),new { id = int.Parse(collection[app.Tag.EmployeeId].ToString())});
+                return RedirectToAction(nameof(Index), new { id = int.Parse(collection[app.Tag.EmployeeId].ToString()) });
             }
             catch
             {
