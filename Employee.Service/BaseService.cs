@@ -32,7 +32,7 @@ namespace Employee.Service
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        
+
         public IQueryable<T> Set<T>() where T : class
         {
             return this.Context.Set<T>();

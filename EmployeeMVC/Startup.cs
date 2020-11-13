@@ -1,6 +1,7 @@
 using Employee.Interface;
 using Employee.Model;
 using Employee.Service;
+using EmployeeMVC.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Session;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using EmployeeMVC.Utility;
 
 namespace EmployeeMVC
 {
@@ -46,7 +43,6 @@ namespace EmployeeMVC
             services.AddScoped<DbContext, InterviewContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<ITaskService, TaskService>();
-            //services.AddScoped(typeof(CustomExceptionFilterAttribute));
 
         }
 

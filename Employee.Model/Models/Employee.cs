@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,7 +9,7 @@ namespace Employee.Model
     public partial class Employee
     {
         public int EmployeeId { get; set; }
-        
+
         [Required]
         [MaxLength(50)]
         [Description("名")]

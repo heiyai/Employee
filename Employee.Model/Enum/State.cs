@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Employee.Model
+﻿namespace Employee.Model
 {
-    public enum State 
+    public enum State
     {
         Nomal = 0,
         Deleted = 1,
