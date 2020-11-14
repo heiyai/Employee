@@ -9,6 +9,7 @@ using System.Net.Http;
 
 namespace EmployeeWebAPI.Controllers
 {
+    using E = Employee.Model.Employee;
     [Route("[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
@@ -21,7 +22,7 @@ namespace EmployeeWebAPI.Controllers
             this._iTaskService = taskService;
         }
 
-        // GET api/<EmployeeController>/5
+        
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -33,13 +34,13 @@ namespace EmployeeWebAPI.Controllers
             return Newtonsoft.Json.JsonConvert.SerializeObject(emp);
         }
 
-        // POST api/<EmployeeController>
+        
         [HttpPost]
         public HttpResponseMessage Post(string value)
         {
             var response = new HttpResponseMessage();
-            Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
-            var entity = _iEmployeeService.Insert<Employee.Model.Employee>(employee);
+            E employee = JsonConvert.DeserializeObject<E>(value);
+            var entity = _iEmployeeService.Insert<E>(employee);
             if (entity == null || entity.EmployeeId <= 0)
                 response.StatusCode = HttpStatusCode.BadRequest;
             else
@@ -47,19 +48,19 @@ namespace EmployeeWebAPI.Controllers
             return response;
         }
 
-        // PUT api/<EmployeeController>/5
+        
         [HttpPut]
         public HttpResponseMessage Put(int id, string value)
         {
             var response = new HttpResponseMessage();
             response.StatusCode = HttpStatusCode.OK;
-            Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
+            E employee = JsonConvert.DeserializeObject<E>(value);
             employee.EmployeeId = id;
-            _iEmployeeService.Update<Employee.Model.Employee>(employee);
+            _iEmployeeService.Update<E>(employee);
             return response;
         }
 
-        // DELETE api/<EmployeeController>/5
+        
         [HttpDelete("{id}")]
         public HttpResponseMessage Delete(int id)
         {
@@ -67,7 +68,7 @@ namespace EmployeeWebAPI.Controllers
             response.StatusCode = HttpStatusCode.OK;
 
 
-            _iEmployeeService.Delete<Employee.Model.Employee>(id);
+            _iEmployeeService.Delete<E>(id);
 
 
             return response;

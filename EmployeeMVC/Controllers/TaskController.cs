@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace EmployeeMVC.Controllers
 {
+    using T = Employee.Model.Task;
     public class TaskController : Controller
     {
         private readonly ILogger<TaskController> _logger;
@@ -36,7 +37,7 @@ namespace EmployeeMVC.Controllers
                 HttpContext.Session.SetInt32(app.Tag.EmployeeId, id);
             if (id == 0)
                 id = HttpContext.Session.GetInt32(app.Tag.EmployeeId).Value;
-            var list = _iTaskService.Query<Task>(x => x.EmployeeId == id);
+            var list = _iTaskService.Query<T>(x => x.EmployeeId == id);
             var employee = _iEmployeeService.Find<Employee.Model.Employee>(id);
             var employeeName = employee.FirstName + employee.LastName;
             ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] = employeeName;
@@ -52,7 +53,7 @@ namespace EmployeeMVC.Controllers
         {
             var tName = Request.Form[app.Tag.TaskName];
             var employeeID = HttpContext.Session.GetInt32(app.Tag.EmployeeId);
-            var user = this._iTaskService.Query<Employee.Model.Task>(x => x.TaskName.Contains(tName) && x.EmployeeId == employeeID);
+            var user = this._iTaskService.Query<T>(x => x.TaskName.Contains(tName) && x.EmployeeId == employeeID);
             if (HttpContext.Session.GetInt32(app.Tag.EmployeeName) != null)
             {
                 ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] =
@@ -63,7 +64,7 @@ namespace EmployeeMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            var entity = _iTaskService.Query<Task>(x => x.TaskId == id).FirstOrDefault();
+            var entity = _iTaskService.Query<T>(x => x.TaskId == id).FirstOrDefault();
             return View(entity);
         }
 
@@ -73,7 +74,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
-                Task tk = new Task()
+                T tk = new T()
                 {
                     TaskId = int.Parse(collection[app.Tag.TaskId]),
                     EmployeeId = int.Parse(collection[app.Tag.EmployeeId]),
@@ -81,7 +82,7 @@ namespace EmployeeMVC.Controllers
                     StartTime = DateTime.Parse(collection[app.Tag.StartTime]),
                     Deadline = DateTime.Parse(collection[app.Tag.DeadLine])
                 };
-                this._iTaskService.Update<Task>(tk);
+                this._iTaskService.Update<T>(tk);
                 return RedirectToAction(nameof(Index), new { id = collection[app.Tag.EmployeeId] });
             }
             catch
@@ -101,7 +102,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
-                Task tk = new Task()
+                T tk = new T()
                 {
                     EmployeeId = int.Parse(collection[app.Tag.EmployeeId].ToString()),
                     TaskName = collection[app.Tag.TaskName],
@@ -120,7 +121,7 @@ namespace EmployeeMVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            var entity = _iTaskService.Find<Task>(id);
+            var entity = _iTaskService.Find<T>(id);
             return View(entity);
         }
 
@@ -130,7 +131,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
-                _iTaskService.Delete<Task>(id);
+                _iTaskService.Delete<T>(id);
                 var a = int.Parse(collection[app.Tag.EmployeeId].ToString());
                 return RedirectToAction(nameof(Index), new { id = int.Parse(collection[app.Tag.EmployeeId].ToString()) });
             }

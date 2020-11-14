@@ -22,7 +22,7 @@ namespace EmployeeWebAPI.Controllers
         {
             this._iTaskService = taskService;
         }
-        // GET: api/<TaskController>
+        
         [HttpGet]
         [Route("getbyemployeeid/{id:int}")]
         public IEnumerable<T> GetByEmployeeID(int id)
@@ -30,7 +30,7 @@ namespace EmployeeWebAPI.Controllers
             return this._iTaskService.Query<T>(x => x.EmployeeId == id);
         }
 
-        // GET api/<TaskController>/5
+        
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -40,7 +40,7 @@ namespace EmployeeWebAPI.Controllers
             return Newtonsoft.Json.JsonConvert.SerializeObject(task);
         }
 
-        // POST api/<TaskController>
+        
         [HttpPost]
         public HttpResponseMessage Post(string value)
         {
@@ -54,7 +54,7 @@ namespace EmployeeWebAPI.Controllers
             return response;
         }
 
-        // PUT api/<TaskController>/5
+        
         [HttpPut]
         public HttpResponseMessage Put(int id, string value)
         {
@@ -66,7 +66,7 @@ namespace EmployeeWebAPI.Controllers
             return response;
         }
 
-        // DELETE api/<TaskController>/5
+        
         [HttpDelete("{id}")]
         public HttpResponseMessage Delete(int id)
         {

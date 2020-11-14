@@ -8,6 +8,8 @@ using System.Linq.Expressions;
 
 namespace EmployeeMVC.Controllers
 {
+    
+    using E = Employee.Model.Employee;
     public class EmployeeController : Controller
     {
         private readonly ILogger<EmployeeController> _logger;
@@ -31,7 +33,7 @@ namespace EmployeeMVC.Controllers
 
         public ActionResult Index()
         {
-            var users = this._iEmployeeService.Set<Employee.Model.Employee>();
+            var users = this._iEmployeeService.Set<E>();
             return View(users);
         }
 
@@ -41,7 +43,7 @@ namespace EmployeeMVC.Controllers
             var fName = Request.Form[app.Tag.FirstName];
             var lName = Request.Form[app.Tag.LastName];
 
-            Expression<Func<Employee.Model.Employee, bool>> expression = null;
+            Expression<Func<E, bool>> expression = null;
             if (fName == string.Empty && lName != string.Empty)
             {
                 expression = x => x.LastName.Contains(lName);
@@ -55,19 +57,16 @@ namespace EmployeeMVC.Controllers
                 expression = x => x.FirstName.Contains(fName) && x.LastName.Contains(lName);
             }
 
-            //var user = this._iEmployeeService.QueryPage<Employee.Model.Employee,int>(u => u.FirstName.Contains(fName) || u.LastName.Contains(lName), 5, 1, u => u.EmployeeId);
-            var user = this._iEmployeeService.Query<Employee.Model.Employee>(expression);
+            var user = this._iEmployeeService.Query<E>(expression);
 
             return View(nameof(Index), user);
         }
 
-        // GET: EmployeeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -77,13 +76,13 @@ namespace EmployeeMVC.Controllers
                 var lastName = collection[app.Tag.LastName];
                 var firstName = collection[app.Tag.FirstName];
 
-                Employee.Model.Employee emp = new Employee.Model.Employee()
+                E emp = new E()
                 {
                     FirstName = firstName,
                     LastName = lastName
                 };
 
-                var entity = this._iEmployeeService.Insert<Employee.Model.Employee>(emp);
+                var entity = this._iEmployeeService.Insert<E>(emp);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -95,7 +94,7 @@ namespace EmployeeMVC.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            var entity = _iEmployeeService.Find<Employee.Model.Employee>(id);
+            var entity = _iEmployeeService.Find<E>(id);
             return View(entity);
         }
 
@@ -106,7 +105,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
-                Employee.Model.Employee emp = new Employee.Model.Employee()
+                E emp = new E()
                 {
                     EmployeeId = int.Parse(collection[app.Tag.EmployeeId]),
                     FirstName = collection[app.Tag.LastName],
@@ -114,7 +113,7 @@ namespace EmployeeMVC.Controllers
                     HiredDate = DateTime.Parse(collection[app.Tag.HiredDate])
                 };
 
-                this._iEmployeeService.Update<Employee.Model.Employee>(emp);
+                this._iEmployeeService.Update<E>(emp);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -126,7 +125,7 @@ namespace EmployeeMVC.Controllers
         // GET: EmployeeController/Delete/5
         public ActionResult Delete(int id)
         {
-            var entity = _iEmployeeService.Find<Employee.Model.Employee>(id);
+            var entity = _iEmployeeService.Find<E>(id);
             return View(entity);
         }
 
@@ -137,7 +136,7 @@ namespace EmployeeMVC.Controllers
         {
             try
             {
-                _iEmployeeService.Delete<Employee.Model.Employee>(id);
+                _iEmployeeService.Delete<E>(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
