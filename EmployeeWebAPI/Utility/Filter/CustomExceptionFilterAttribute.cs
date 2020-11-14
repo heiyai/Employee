@@ -31,9 +31,6 @@ namespace EmployeeWebAPI.Utility.Filter
                 _Logger.LogError(context.Exception.Message);
                 //处理异常 
                 {
-
-                    throw new Exception("ExceptionFilter  内部发生异常~~");
-
                     //发个邮件
                     //发个信息
                 }

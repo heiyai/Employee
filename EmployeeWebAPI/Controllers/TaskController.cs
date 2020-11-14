@@ -27,15 +27,13 @@ namespace EmployeeWebAPI.Controllers
         [Route("getbyemployeeid/{id:int}")]
         public IEnumerable<T> GetByEmployeeID(int id)
         {
-            return this._iTaskService.Query<T>(x => x.EmployeeId == id); 
+            return this._iTaskService.Query<T>(x => x.EmployeeId == id);
         }
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            
-            throw new System.Web.Http.HttpResponseException(HttpStatusCode.BadRequest);
             var task = this._iTaskService.Find<T>(id);
             if (task == null)
                 return app.Tag.Failed;
@@ -74,16 +72,7 @@ namespace EmployeeWebAPI.Controllers
         {
             var response = new HttpResponseMessage();
             response.StatusCode = HttpStatusCode.OK;
-
-            try
-            {
-                _iTaskService.Delete<T>(id);
-            }
-            catch (Exception ex)
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                return response;
-            }
+            _iTaskService.Delete<T>(id);
             return response;
         }
 
@@ -93,16 +82,7 @@ namespace EmployeeWebAPI.Controllers
         {
             var response = new HttpResponseMessage();
             response.StatusCode = HttpStatusCode.OK;
-
-            try
-            {
-                _iTaskService.DeleteByEmployeeID<T>(id);
-            }
-            catch (Exception ex)
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                return response;
-            }
+            _iTaskService.DeleteByEmployeeID<T>(id);
             return response;
         }
     }
