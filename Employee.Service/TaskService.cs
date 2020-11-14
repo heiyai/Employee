@@ -1,7 +1,5 @@
 ﻿using Employee.Interface;
 using Microsoft.EntityFrameworkCore;
-using Employee.Model;
-using System;
 
 namespace Employee.Service
 {
