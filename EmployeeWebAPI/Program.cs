@@ -17,10 +17,9 @@ namespace EmployeeWebAPI
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-            .ConfigureLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddLog4Net();
-            })
-            ;
+                .ConfigureLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddLog4Net();
+                });
     }
 }

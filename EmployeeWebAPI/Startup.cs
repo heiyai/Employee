@@ -51,11 +51,11 @@ namespace EmployeeWebAPI
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowCors");
+
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseCors("AllowCors");
 
             app.UseEndpoints(endpoints =>
             {
