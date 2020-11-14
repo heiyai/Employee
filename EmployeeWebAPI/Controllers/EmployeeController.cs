@@ -10,7 +10,7 @@ using System.Net.Http;
 namespace EmployeeWebAPI.Controllers
 {
     [Route("[controller]")]
-    [ApiController] 
+    [ApiController]
     public class EmployeeController : ControllerBase
     {
         private IEmployeeService _iEmployeeService = null;
@@ -25,7 +25,7 @@ namespace EmployeeWebAPI.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            
+
             var emp = _iEmployeeService.Find<Employee.Model.Employee>(id);
             if (emp == null)
                 return app.Tag.Failed;
@@ -66,15 +66,10 @@ namespace EmployeeWebAPI.Controllers
             var response = new HttpResponseMessage();
             response.StatusCode = HttpStatusCode.OK;
 
-            try
-            {
-                _iEmployeeService.Delete<Employee.Model.Employee>(id);
-            }
-            catch (Exception ex)
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                return response;
-            }
+
+            _iEmployeeService.Delete<Employee.Model.Employee>(id);
+
+
             return response;
         }
     }

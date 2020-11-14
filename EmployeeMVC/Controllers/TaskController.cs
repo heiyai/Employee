@@ -38,7 +38,11 @@ namespace EmployeeMVC.Controllers
                 id = HttpContext.Session.GetInt32(app.Tag.EmployeeId).Value;
             var list = _iTaskService.Query<Task>(x => x.EmployeeId == id);
             var employee = _iEmployeeService.Find<Employee.Model.Employee>(id);
-            ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] = employee.FirstName + employee.LastName;
+            var employeeName = employee.FirstName + employee.LastName;
+            ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] = employeeName;
+            if (HttpContext.Session.GetInt32(app.Tag.EmployeeName) == null)
+                HttpContext.Session.SetString(app.Tag.EmployeeName, employeeName);
+            
             ViewBag.EmployeeID = TempData[app.Tag.EmployeeId] = id;
             return View(list);
         }
@@ -49,7 +53,11 @@ namespace EmployeeMVC.Controllers
             var tName = Request.Form[app.Tag.TaskName];
             var employeeID = HttpContext.Session.GetInt32(app.Tag.EmployeeId);
             var user = this._iTaskService.Query<Employee.Model.Task>(x => x.TaskName.Contains(tName) && x.EmployeeId == employeeID);
-
+            if (HttpContext.Session.GetInt32(app.Tag.EmployeeName) != null)
+            {
+                ViewBag.EmployeeName = TempData[app.Tag.EmployeeName] =
+                HttpContext.Session.GetString(app.Tag.EmployeeName);
+            }
             return View(nameof(Index), user);
         }
 
