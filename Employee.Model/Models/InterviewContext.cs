@@ -66,11 +66,11 @@ namespace Employee.Model
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Task_Employee");
+                //entity.HasOne(d => d.Employee)
+                //    .WithMany(p => p.Tasks)
+                //    .HasForeignKey(d => d.EmployeeId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Task_Employee");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Employee.Model;
-using System.Net.Http;
-using System.Web.Http;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
 
 namespace EmployeeWebAPI.Controllers
 {

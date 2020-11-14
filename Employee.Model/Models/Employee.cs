@@ -30,7 +30,7 @@ namespace Employee.Model
         [DataType(DataType.DateTime)]
         public DateTime HiredDate { get; set; }
 
-        //public IList<Task> Tasks { get; set; }
+        //public List<Task> Tasks { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         [Description("名")]
         public string FName { get { return FirstName.Length > 5 ? FirstName.Substring(0, 5) + "..." : FirstName; } }
