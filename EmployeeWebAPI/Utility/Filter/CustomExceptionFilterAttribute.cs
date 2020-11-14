@@ -39,7 +39,7 @@ namespace EmployeeWebAPI.Utility.Filter
                 }
                 context.ExceptionHandled = true; //标记当前抛出的异常已经被处理过了
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

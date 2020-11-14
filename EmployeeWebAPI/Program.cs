@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeWebAPI
 {
@@ -15,6 +16,11 @@ namespace EmployeeWebAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .ConfigureLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddLog4Net();
+            })
+            ;
     }
 }

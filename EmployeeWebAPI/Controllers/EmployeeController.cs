@@ -10,7 +10,7 @@ using System.Net.Http;
 namespace EmployeeWebAPI.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
+    [ApiController] 
     public class EmployeeController : ControllerBase
     {
         private IEmployeeService _iEmployeeService = null;
