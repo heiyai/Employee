@@ -15,7 +15,7 @@ namespace Employee.Service
         {
 
             var tasks = this.Query<Employee.Model.Task>(x => x.EmployeeId == employeeID);
-            if (tasks == null) throw new Exception("t is null");
+            if (tasks == null) return;
             this.Context.RemoveRange(tasks);
             this.Commit();
 

@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Employee.Model;
+using System.Net.Http;
+using System.Web.Http;
+using System.Net;
 
 namespace EmployeeWebAPI.Controllers
 {
@@ -33,27 +36,47 @@ namespace EmployeeWebAPI.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public HttpResponseMessage Post(string value)
         {
+            var response = new HttpResponseMessage();
             Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
-
+            var entity = _iEmployeeService.Insert<Employee.Model.Employee>(employee);
+            if (entity == null || entity.EmployeeId <= 0)
+                response.StatusCode = HttpStatusCode.BadRequest;
+            else
+                response.StatusCode = HttpStatusCode.OK;
+            return response;
         }
 
         // PUT api/<EmployeeController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public HttpResponseMessage Put(int id, string value)
         {
+            var response = new HttpResponseMessage();
+            response.StatusCode = HttpStatusCode.OK;
             Employee.Model.Employee employee = JsonConvert.DeserializeObject<Employee.Model.Employee>(value);
+            employee.EmployeeId = id;
+            _iEmployeeService.Update<Employee.Model.Employee>(employee);
+            return response;
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            _iTaskService.DeleteByEmployeeID<Task>(id);
-            _iEmployeeService.Delete<Employee.Model.Employee>(id);
+            var response = new HttpResponseMessage();
+            response.StatusCode = HttpStatusCode.OK;
 
-            return app.Tag.Successufl;
+            try
+            {
+                _iEmployeeService.Delete<Employee.Model.Employee>(id);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+                return response;
+            }
+            return response;
         }
     }
 }

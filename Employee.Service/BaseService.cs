@@ -143,7 +143,7 @@ namespace Employee.Service
             this.Commit();
         }
 
-        public void Delete<T>(int Id) where T : class
+        public virtual void Delete<T>(int Id) where T : class
         {
             T t = this.Find<T>(Id);//也可以附加
             if (t == null) throw new Exception("t is null");
