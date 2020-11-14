@@ -8,18 +8,17 @@ namespace Employee.NUnit
 		[Test]
 		public void MVCTestForEmployee()
 		{
-			//var employeeService = new Employee.Service.EmployeeService();
+			
 
-			//Assert.That(tested.RomanToInt("MCDLXXVI"), Is.EqualTo(1576));
-			//Assert.That(tested.Classical(12345), Is.EqualTo(54321));
+			//Assert.That(, Is.EqualTo());
+			//Assert.That(, Is.EqualTo());
 		}
 		[Test]
 		public void MVCTestForTask()
 		{
-			//var tested = new RomanToInteger();
 
-			//Assert.That(tested.RomanToInt("MCDLXXVI"), Is.EqualTo(1576));
-			//Assert.That(tested.Classical(12345), Is.EqualTo(54321));
+			//Assert.That(, Is.EqualTo());
+			//Assert.That(, Is.EqualTo());
 		}
 	}
 }
