@@ -7,13 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeMVC", "EmployeeMVC\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeWebAPI", "EmployeeWebAPI\EmployeeWebAPI.csproj", "{3075EB7B-FD5D-4B1A-B692-E1BCAD478A92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Model", "Employee.Model\Employee.Model.csproj", "{DE5B5468-DDF4-4DC6-9AAD-FCE5A9D4563A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Model", "Employee.Model\Employee.Model.csproj", "{DE5B5468-DDF4-4DC6-9AAD-FCE5A9D4563A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Interface", "Employee.Interface\Employee.Interface.csproj", "{568519EF-91E4-4466-9FAB-E2E0DFF761B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Interface", "Employee.Interface\Employee.Interface.csproj", "{568519EF-91E4-4466-9FAB-E2E0DFF761B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Service", "Employee.Service\Employee.Service.csproj", "{37BD04C2-3297-4633-9F9D-B68938F9C6A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Service", "Employee.Service\Employee.Service.csproj", "{37BD04C2-3297-4633-9F9D-B68938F9C6A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.NUnit", "Employee.NUnit\Employee.NUnit.csproj", "{DDB8FBD6-D37B-4693-9225-D5E1CDEBF8AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.NUnit", "Employee.NUnit\Employee.NUnit.csproj", "{DDB8FBD6-D37B-4693-9225-D5E1CDEBF8AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITestForCORS", "WebAPITestForCORS\WebAPITestForCORS.csproj", "{04D47B83-9392-4E3C-B12F-949EB4606D2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DDB8FBD6-D37B-4693-9225-D5E1CDEBF8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDB8FBD6-D37B-4693-9225-D5E1CDEBF8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDB8FBD6-D37B-4693-9225-D5E1CDEBF8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D47B83-9392-4E3C-B12F-949EB4606D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D47B83-9392-4E3C-B12F-949EB4606D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D47B83-9392-4E3C-B12F-949EB4606D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D47B83-9392-4E3C-B12F-949EB4606D2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
