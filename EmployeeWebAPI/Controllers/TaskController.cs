@@ -1,4 +1,5 @@
 ﻿using Employee.Interface;
+using EmployeeWebAPI.Utility.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -33,6 +34,8 @@ namespace EmployeeWebAPI.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            
+            throw new System.Web.Http.HttpResponseException(HttpStatusCode.BadRequest);
             var task = this._iTaskService.Find<T>(id);
             if (task == null)
                 return app.Tag.Failed;
